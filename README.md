@@ -39,10 +39,12 @@ WHERE f.`length` > (SELECT AVG(`length`) FROM film)
 *Ответ:*
 
 ```sql
-SELECT MONTH(payment_date), SUM(p.amount), COUNT(p.rental_id) 
-FROM payment p
-GROUP BY MONTH(payment_date)
-ORDER BY SUM(p.amount ) DESC
+SELECT DATE_FORMAT(payment_date, '%Y-%m') AS payment_month, COUNT(rental_id) AS rental_count, SUM(amount) AS total_amount 
+FROM payment 
+GROUP BY payment_month 
+ORDER BY total_amount DESC 
 LIMIT 1;
 ```
 ---
+
+
